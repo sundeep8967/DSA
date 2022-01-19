@@ -1,0 +1,29 @@
+
+#include <bits/stdc++.h>
+using namespace std;
+#define p 4
+
+//sum==n//
+int coinchange(int arr[],int n,int idx){
+    
+    if(n==0) return 1;
+    if(n<0) return 0;
+    
+    if(n>0 && idx==p) return 0;
+    
+    return coinchange(arr,n-arr[idx],idx)+coinchange(arr,n,idx+1);
+    
+    
+}
+
+
+int main()
+{
+    int arr[]={2,3,5,6};
+    int n=10;
+    
+    int ans=coinchange(arr,n,0);
+    cout<<ans<<endl;
+
+    return 0;
+}
