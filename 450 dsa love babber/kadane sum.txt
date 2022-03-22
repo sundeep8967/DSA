@@ -1,0 +1,25 @@
+long long maxSubarraySum(int arr[], int n){
+       long long int maxsum=INT_MIN,cursum=0;
+        // Your code here
+         int minint =arr[0];
+        
+        
+        for(int i=0;i<n;i++){
+            int l=arr[i];
+            minint=max(minint,l);
+            cursum+=arr[i];
+             if(cursum<=0){
+                cursum=0;
+            }
+            
+            
+            if(cursum>maxsum){
+                maxsum=cursum;
+            }
+           
+            
+        }
+        if(maxsum<=0) return minint;
+        
+        return maxsum;
+    }
