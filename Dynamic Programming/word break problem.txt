@@ -1,0 +1,67 @@
+ bool func(string s , vector<string>&wordDict){
+        
+        
+        int size=wordDict.size();
+        
+        for( int i=0;i<size;i++ ){
+            if(wordDict[i].compare(s)==0){
+                return true;
+            }
+        }
+        
+        return false;
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    bool wordBreak(string s, vector<string>& wordDict) {
+        
+        
+        
+        int n=s.size();
+        if(n==0) return true;
+        
+        bool wb[n+1];
+        memset(wb,0,sizeof(wb));
+        
+        
+        
+        for(int i=1;i<=s.size() ; i++){
+        
+            if(wb[i]==false && func(s.substr(0,i) ,wordDict   )  ){
+                wb[i]=true;
+                
+            }
+            
+            if(wb[i]==true){
+                if(i==n) return true;
+            
+        
+        for(int j=i+1;j<=s.size();j++){
+            
+            
+        if(wb[j]==false && func(s.substr(i, j-i) , wordDict) ){
+            wb[j]=true;
+        }
+            if(wb[j]==true && j==n ){
+                return true;
+            }
+            
+            
+        }
+            
+        }
+        }
+        
+        return false;
+        
+        
+        
+        
+        
+    }

@@ -1,0 +1,27 @@
+ int combinationSum4(vector<int>& nums, int target) {
+        
+        
+        int n=nums.size();
+        
+        
+        unsigned long long dp[target+1];
+        memset(dp,0,sizeof(dp));
+        dp[0]=1;
+        for(int i=1;i<=target;i++){
+            for(auto x:nums){
+                if(i>=x){
+                dp[i]=(unsigned long long)(dp[i]+dp[i-x]);
+                }
+            }
+            
+        }
+        
+        return dp[target];
+        
+        
+        
+        
+        
+        
+        
+    }
