@@ -1,0 +1,52 @@
+ int longestConsecutive(vector<int>& nums) {
+        
+        
+        
+        
+        unordered_set<int > st;
+        
+        int n=nums.size();
+        if(n<2) return n;
+        
+        for(int i=0;i<n;i++){
+            st.insert(nums[i]);
+        }
+            
+            
+            int tempmax=0;
+        int realmax=0;
+        
+        for( int num : nums ){
+            
+            if(st.find(num-1)==st.end()){
+                
+                int chamcha=num;
+                int count=0;
+                while(st.find(chamcha)!=st.end()){
+                    count++;
+                    realmax=max(realmax,count);
+                   chamcha++;
+                    
+                }
+                
+                
+                
+            }
+            
+            
+        }
+        
+        
+        return realmax;
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }
