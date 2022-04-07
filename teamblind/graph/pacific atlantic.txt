@@ -1,0 +1,67 @@
+    vector<vector<int>> pacificAtlantic(vector<vector<int>>& mat) {
+        
+        
+        
+        
+        vector<vector<int>> pacific ( mat.size() , vector<int>(mat[0].size(), 0 ) );
+        vector<vector<int>> atlantic( mat.size() , vector<int>(mat[0].size(),0  ) );
+        
+        for(int i=0;i<mat[0].size() ; i++){
+            
+            func(mat, 0 , i , INT_MIN , pacific );
+            func(mat, mat.size()-1 , i , INT_MIN , atlantic);
+            
+            
+        }
+        
+        for(int i=0;i<mat.size() ; i++){
+            func(mat,i ,0 ,INT_MIN , pacific);
+            func(mat,i,mat[0].size()-1 , INT_MIN, atlantic );
+            
+        }
+        vector<vector<int>> ans;
+        
+        for(int i=0;i<mat.size() ; i++){
+            for(int j=0;j<mat[0].size() ; j++){
+                if(pacific[i][j]==1 && atlantic[i][j]==1){
+                    
+                    vector<int> v(2);
+                    v[0]=i;
+                    v[1]=j;
+                    ans.push_back(v);
+                    
+                    
+                }
+            }
+        }
+        return ans;
+        
+    }
+    
+    
+   void func(vector<vector<int>> &mat , int  i ,int j , int prev ,vector<vector<int>> &ocean ){
+        
+        
+        if(i<0 || i>=mat.size() || j<0 || j>=mat[0].size()    ) 
+            return ;
+        
+        if(ocean[i][j]==1)
+            return ;
+        
+        if(mat[i][j]<prev)
+            return ;
+        
+        
+     ocean[i][j]=1;
+        
+        func(mat,i+1,j,mat[i][j],ocean);
+        func(mat,i-1,j,mat[i][j],ocean);
+               func(mat,i,j+1,mat[i][j],ocean); 
+
+          func(mat,i,j-1,mat[i][j],ocean);
+        
+        
+        
+        
+    }
+    
