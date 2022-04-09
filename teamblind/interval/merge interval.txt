@@ -1,0 +1,38 @@
+  vector<vector<int>> merge(vector<vector<int>>& intervals) {
+     
+        
+        
+        
+        
+        int i=0,n=intervals.size();
+        vector<vector<int>> result ;
+        sort(intervals.begin() , intervals.end());
+        
+        vector<int> tempinterval =intervals[0];
+        
+        for(auto it:intervals){
+            
+            
+            if(it[0]<=tempinterval[1]){
+            
+                tempinterval[0]=min(it[0],tempinterval[0]);
+                tempinterval[1]=max(it[1],tempinterval[1]);
+            
+            }
+            else{
+                result.push_back(tempinterval);
+                tempinterval=it;
+            }
+            
+            
+            
+            
+        }
+        
+        result.push_back(tempinterval);
+        return result;
+        
+        
+        
+        
+    }

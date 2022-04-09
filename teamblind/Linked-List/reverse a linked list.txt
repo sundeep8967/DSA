@@ -1,0 +1,18 @@
+  if(head == NULL || head -> next == NULL) {
+            return head;
+        }
+        
+		// initiate the values
+        ListNode* prev = NULL;
+        ListNode* curr = head;
+        ListNode* forward = NULL;
+        
+        while(curr != NULL) {
+            forward = curr -> next;
+            curr -> next = prev;
+            prev = curr;
+            curr = forward;
+        }
+        head = prev;
+        return head;    
+    }
