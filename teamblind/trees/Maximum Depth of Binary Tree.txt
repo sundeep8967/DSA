@@ -1,0 +1,70 @@
+ int maxDepth(TreeNode* root) {
+        
+//         DFS
+//         if(!root){
+//             return 0;
+//         }
+        
+        
+//         return 1+max(maxDepth(root->left) , maxDepth(root->right));
+        
+        
+        
+        
+        
+       //BFS
+        
+        
+        if(!root) return 0;
+        
+        
+     queue<TreeNode*> q;
+        
+        q.push(root);
+        
+        
+        int level=0;
+        
+        while(q.size()>0){
+            
+            level++;
+            
+             int breath = q.size();
+            
+            for(int i=0;i<breath;i++){
+                
+                TreeNode* head=q.front();
+                q.pop();
+                
+                
+                if(!head->left &&!head->right ) continue;
+                else if(!head->left)q.push(head->right);
+                else if(!head->right)q.push(head->left);
+                else {
+                    
+                    
+                    q.push(head->left);
+                    q.push(head->right);
+                    
+                }
+                
+                
+                
+                
+                
+                
+                
+            }
+            
+            
+            
+        }
+        
+        
+        
+        
+        return level;
+        
+        
+        
+    }

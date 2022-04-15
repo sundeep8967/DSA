@@ -1,0 +1,48 @@
+ int kthSmallest(TreeNode* root, int k) {
+        
+        if(!root && k>0) return -1; 
+        
+        vector<int> v;
+        
+        queue<TreeNode*> q;
+        
+        q.push(root);
+        
+        
+        
+        while(!q.empty()){
+            
+            
+           
+            int breath=q.size();
+            
+            for(int i=0;i<breath;i++){
+                
+                TreeNode* curr=q.front();
+                v.push_back(curr->val);
+                q.pop();
+                
+                
+                
+                if(curr->left!=NULL) q.push(curr->left);
+                if(curr->right!=NULL) q.push(curr->right);
+                
+                
+                
+            }
+            
+            
+            
+            
+        }
+        
+        
+        sort(v.begin() , v.end() );
+        
+        return v[k-1];
+        
+        
+        
+        
+        
+    }

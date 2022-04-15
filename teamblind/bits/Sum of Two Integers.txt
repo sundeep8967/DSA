@@ -1,0 +1,14 @@
+  int getSum(int a, int b) {
+        
+        
+        int xorr=a^b;
+        long carry=a&b;
+        cout<<carry<<endl;
+        
+        if( carry==0 ) return xorr;
+        
+        else return getSum(xorr,carry<<=1);
+        
+        
+        
+    }

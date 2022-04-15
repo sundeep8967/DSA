@@ -1,0 +1,30 @@
+  
+    void dfs(TreeNode* curr){
+        
+        if(curr==nullptr) return;
+        
+        dfs(curr->left);
+        dfs(curr->right);
+        
+        swap(curr->left , curr->right);
+        
+        
+        
+    }
+    
+    
+    
+    
+    TreeNode* invertTree(TreeNode* root) {
+        
+        
+        
+        TreeNode *head=root;
+        
+        dfs(root);
+        
+        return head;
+        
+        
+        
+    }
