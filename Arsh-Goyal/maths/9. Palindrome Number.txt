@@ -1,0 +1,42 @@
+class Solution {
+public:
+    bool isPalindrome(int x) {
+        
+        
+        
+        string s="";
+        
+        int n=x;
+        
+    while(true){
+        
+        
+        int l = n%10 ;
+        
+        s+=to_string(l);
+        
+        n=n/10;
+        
+        if(n==0){
+            break;
+        }
+        
+        
+        
+    }
+        
+        
+        int i=0,j=s.size()-1;
+        
+        while(i<j){
+            
+            
+            if(s[i++]!=s[j--]) return false;
+            
+        }
+        return true;
+        
+        
+        
+    }
+};
