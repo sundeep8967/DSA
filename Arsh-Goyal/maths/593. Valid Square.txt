@@ -1,0 +1,64 @@
+class Solution {
+public:
+    bool validSquare(vector<int>& p1, vector<int>& p2, vector<int>& p3, vector<int>& p4) {
+        
+        
+//         map<int , int > mp;
+        
+//         mp[ d(p1,p2) ] ++; 
+        
+//         mp[ d(p1,p3) ] ++;
+        
+//         mp[ d(p1,p4) ] ++;
+        
+//         mp[ d(p2,p3) ] ++;
+        
+//         mp[ d(p2,p4) ] ++;
+        
+//         mp[ d(p3,p4) ] ++;
+ 
+        
+//         if(mp.size()!=2)return false;
+        
+//         return mp.begin()->second==4 && mp.rbegin()->second==2;
+        
+        vector<vector<int> > pts={p1,p2,p3,p4};
+        
+        sort(begin(pts) , end(pts) );
+        
+        
+        int d0=di(pts[0] , pts[1] ) , d1=di(pts[0] , pts[2] ) , d2=di(pts[0] , pts[3] ) , d3=di(pts[1] , pts[2]) ;
+        
+        
+        
+        return d1==d0 && d2==d3 && d0 ;
+        
+        
+        
+        
+    }
+    
+    
+    int di(vector<int> pts1 , vector<int> pts2){
+        
+        int ans=pow( pts1[0]-pts2[0] ,2);
+        int ans1=pow(pts1[1]-pts2[1] , 2);
+        
+        return ans+ans1;
+    }
+        
+    
+    
+    
+    
+    int d(vector<int> p1  ,vector<int> p2  ){
+        
+        
+        
+        
+        return ( ( p1[0]-p2[0] )*(p1[0]-p2[0]) )+ ( ( p1[1]-p2[1] )*(p1[1]-p2[1]) );
+        
+        
+    }
+    
+};

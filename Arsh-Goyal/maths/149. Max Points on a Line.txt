@@ -1,0 +1,82 @@
+class Solution {
+public:
+    int maxPoints(vector<vector<int>>& points) {
+        
+        
+        
+       
+        
+        int n=points.size();
+        
+        double slope;
+        
+      
+        
+        int result=0;
+        
+        for(int i=0;i<n;i++ ){
+            
+             unordered_map<double,int> mp;
+            
+              int localmax=0;
+
+            int same=1;
+            
+            for(int j=i+1;j<n;j++){
+                
+              
+                
+                if( points[i][0]==points[j][0] && points[i][1]==points[j][1] ){
+                    
+                    same++;
+                
+                }
+                
+                else if( points[i][0]==points[j][0] ){
+                    
+                    mp[INT_MAX]++;
+                    
+                }
+                
+                else{
+                  
+              double slope=(double)( points[j][1]-points[i][1])/(double)(points[j][0]-points[i][0] );
+                    mp[slope]++;
+                    
+                }
+                
+                
+                
+            }//inner for
+            
+            
+            for(auto i : mp ){
+                
+                localmax=max(localmax , i.second ) ;
+                
+                
+            }
+            
+            
+            result=max(result,same+localmax) ;
+            
+            
+            
+            
+            
+        }//biggerfor
+        
+        
+        
+        
+        return result;
+        
+        
+        
+        
+        
+        
+        
+        
+    }
+};
