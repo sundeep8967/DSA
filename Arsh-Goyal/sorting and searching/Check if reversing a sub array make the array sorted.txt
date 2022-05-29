@@ -1,0 +1,62 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+bool func(vector<int> arr , int n ){
+    
+    if(n==1) return true;
+    
+    
+    int i;
+    for(i=1;i<n && arr[i-1]<arr[i]  ;i++)
+    
+    if(i==n) return true;
+    
+    int j=i;
+    
+    while(j<n && arr[j-1]>arr[j]){
+          
+          if(i>1 && arr[i-2]>arr[j-1]) return false;
+          
+          j++;
+        
+        
+        
+    }
+    
+    if(j==n) return true;
+    
+    int k=j;
+    
+    while( k < n ) {
+        
+        if(arr[k-1]>arr[k] && arr[i-1]>arr[k] ) return false;
+        
+        k++;
+    }
+    
+ return true;
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+
+
+
+int main() {
+	//code
+    	
+	vector<int>v{1, 3, 4, 10, 9, 8};
+	
+	bool ans=func(v , 6 );
+	
+	cout<<ans<<endl;
+	
+	return 0;
+}

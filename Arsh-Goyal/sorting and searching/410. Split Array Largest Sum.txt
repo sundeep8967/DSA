@@ -1,0 +1,72 @@
+class Solution {
+public
+    
+    
+    
+    
+    int ispossible(vectorint&nums , int val ){
+        
+        
+        int count=1,tempcount=0,n=nums.size();
+        
+        
+        for(int i=0;in;i++){
+            
+            if(tempcount+nums[i]=val)tempcount+=nums[i];
+            
+            else{
+                tempcount=nums[i];
+                count++;
+            }
+            
+            
+            
+        }
+        
+        return count;
+        
+        
+        
+    }
+    
+    
+    
+    
+    int splitArray(vectorint& nums, int m) {
+        
+        
+    int low=0,high=0;
+        
+        for(auto i  nums){
+            
+            low = max(low,i);
+            high+=i;
+            
+            
+        }
+        
+        
+        int mid;
+        int ans;
+        while(low=high){
+            mid=(low+high)1;
+            
+            int count=ispossible(nums,mid);
+            if(count=m) {
+                
+                high=mid-1;
+                ans=mid;
+                
+                }
+            
+            else low=mid+1;
+            
+        }
+        
+        return ans;
+        
+        
+        
+        
+    }
+};
