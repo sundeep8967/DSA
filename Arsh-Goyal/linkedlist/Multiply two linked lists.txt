@@ -1,0 +1,36 @@
+long long gint( Node* l1 ){
+    
+    long long mod=1000000007;
+    
+    long long ans=0;
+    
+    while(l1!=NULL){
+        
+        long long x=l1->data;
+                  
+        ans=((ans*10)%mod+x)%mod;
+        
+        l1=l1->next;
+        
+    }
+     
+     return ans%mod;
+    
+    
+}
+
+
+long long  multiplyTwoLists (Node* l1, Node* l2)
+{
+    long long mod=1000000007;
+    
+    long long i1=gint(l1);
+    long long i2=gint(l2);
+    
+    
+    
+    return (i1*i2)%mod;
+    
+    
+  //Your code here
+}
