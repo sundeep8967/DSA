@@ -1,0 +1,35 @@
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        
+        ListNode *fast=head,*slow=head,*prev=NULL,*temp;
+        
+        
+        while(fast!=NULL && fast->next ){
+            
+            fast=fast->next->next;
+            temp=slow->next; slow->next=prev; prev=slow ; slow=temp;    
+            
+        }
+        
+        slow=fast?slow->next:slow;
+        
+        while(slow){
+            
+            if(slow->val!=prev->val) return false;
+            slow=slow->next;
+            prev=prev->next;
+            
+        }
+        return true;
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }
+};
