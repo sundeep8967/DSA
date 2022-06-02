@@ -1,0 +1,32 @@
+class Solution {
+public:
+    void reorderList(ListNode* head) {
+        
+        
+        vector<ListNode*> l;
+        
+        while(head){
+            l.push_back(head);
+            head=head->next;
+        }
+        
+        int left=0,right=l.size()-1;
+        
+        while(left<right){
+            
+            
+            l[left++]->next=l[right];
+            
+            if(left==right) break;
+            
+            l[right--]->next=l[left];
+            
+            
+        }
+        l[right]->next=NULL;
+        
+        
+        
+        
+    }
+};
