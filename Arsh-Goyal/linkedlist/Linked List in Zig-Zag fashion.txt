@@ -1,0 +1,47 @@
+class Solution
+{
+    public:
+    Node *zigZag(Node* head)
+    {
+     // your code goes here
+     
+     
+     Node *temp1=head,*temp2=head->next;
+     int itr=1;
+     int swap;
+     while(temp2){
+         
+         if(itr%2!=0){
+             
+             if(temp2->data<temp1->data){
+             swap=temp2->data;
+             temp2->data=temp1->data;
+             temp1->data=swap;
+             }
+             
+         }
+         
+         
+         else if (itr%2==0){
+             if(temp2->data>temp1->data){
+              swap=temp2->data;
+             temp2->data=temp1->data;
+             temp1->data=swap;
+             }
+         }
+         
+         
+         
+         
+         
+         temp1=temp1->next;
+         temp2=temp2->next;
+         
+         itr++;
+     }
+     
+     return head;
+     
+     
+    }
+};
