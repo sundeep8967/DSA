@@ -1,0 +1,212 @@
+/* Structure of linked list Node
+
+struct Node
+{
+    int data;
+    struct Node* next;
+    
+    Node(int x){
+        data = x;
+        next = NULL;
+    }
+    
+};
+
+*/
+
+//You are required to complete this method
+
+
+ Node* reverse(Node *l){
+     
+     
+     Node *temp=l,*prev=NULL, *next;
+     
+     while(temp){
+         
+         next=temp->next;
+         temp->next=prev;
+         prev=temp;
+        
+         temp=next;
+     }
+     
+     return prev;
+     
+     
+     
+     
+     
+ }
+ 
+ int length( Node *l){
+     int count=0;
+     
+     while(l){
+         count++;
+         l=l->next;
+     }
+     
+     return count;
+     
+     
+ }
+ 
+ 
+ 
+  Node* removeleadingzeroes(Node* l){
+      
+      
+      if(l!=NULL && l->data==0){
+          return removeleadingzeroes(l->next);
+      }
+      else return l;
+      
+      
+      
+      
+  }
+  
+  Node* subtract(Node* l1 , Node *l2){
+      
+      
+      l1=reverse(l1);
+      l2=reverse(l2);
+      
+      Node *res = new Node(-1);
+      Node *temp=res;
+      
+      int borrow=0;
+      int diff=0;
+      
+      while(l1){
+          
+          diff=borrow+l1->data-( (l2!=NULL)?l2->data:0  );
+          
+          if(diff<0){
+              borrow=-1;
+              diff=10+diff;
+              
+          }
+          else{
+              borrow=0;
+          }
+          
+          
+          temp->next=new Node(diff);
+          
+          temp=temp->next;
+          
+          if(l1!=NULL){
+              l1=l1->next;
+          }
+          if(l2!=NULL){
+              l2=l2->next;
+          }
+          
+          
+          
+          
+          
+      }
+      
+      res=reverse(res->next);
+      res=removeleadingzeroes(res);
+      
+      return res;
+      
+  }
+
+  
+  
+  Node* findlarger(Node* l1 , int len1 , Node* l2 , int len2){
+      
+      Node *temp1= l1;
+      Node *temp2= l2;
+      
+      
+      if(len1>len2){
+          
+       temp1= l1;
+       temp2= l2;
+          
+      }
+      
+      else if(len2>len1){
+          
+          temp1=l2;
+          temp2=l1;
+          
+      }
+      
+      else{
+          
+          
+          
+          while(temp1!=NULL && temp2!=NULL){
+              
+              
+              if(temp1->data>temp2->data){
+                  temp1=l1;
+                  temp2=l2;
+                  break;
+              }
+              else if (temp1->data<temp2->data){
+                  
+                  temp1=l2;
+                  temp2=l1;
+                  break;
+              }
+              
+              temp1=temp1->next;
+              temp2=temp2->next;
+              
+              
+              
+              
+          }
+          
+         
+          if(temp1==NULL && temp2==NULL){
+             Node*n = new Node(0);
+       n->next = NULL;
+       return n;
+          }
+   
+      }
+      
+       return subtract(temp1,temp2);
+          
+  }
+  
+  
+  
+  
+  
+ 
+
+
+
+Node* subLinkedList(Node* l1, Node* l2)
+{
+    //Your code here
+    
+    
+   l1=removeleadingzeroes(l1);
+   l2=removeleadingzeroes(l2);
+   
+   int len1=length(l1);
+   int len2=length(l2);
+   
+   if(len1==1 && l1->data==0) return l2;
+   if(len2==1 && l2->data==0) return l1;
+   
+   
+    
+ 
+   return findlarger(l1 , len1 ,l2 , len2 );
+       
+    
+    
+    
+}

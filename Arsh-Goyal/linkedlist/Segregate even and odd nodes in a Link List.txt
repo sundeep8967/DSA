@@ -1,0 +1,50 @@
+class Solution{
+public:
+    Node* divide(int N, Node *head){
+        // code here
+        
+        vector<int> vo,ve;
+        
+        Node * temp=head;
+        
+        while(temp){
+            
+            if(temp->data%2==0){
+                ve.emplace_back(temp->data);
+            }
+            else{
+                vo.emplace_back(temp->data);
+            }
+            temp=temp->next;
+            
+            
+        }
+        
+        temp=head;
+        int i=0;
+        
+       
+        
+        int n=ve.size();
+        
+          while(n--){
+            temp->data=ve[i++];
+            temp=temp->next;
+        }
+        
+        
+          n=vo.size();
+          i=0;
+        
+        while(n--){
+            temp->data=vo[i++];
+            temp=temp->next;
+        }
+        
+        
+        return head;
+        
+        
+        
+    }
+};

@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+
+void reorderList(Node* head) {
+    // Your code here
+    vector<int>vv;
+   vector<Node*> v;
+    
+    Node *temp=head;
+    
+    while( temp ){
+        
+        v.emplace_back(temp);
+        
+        temp=temp->next;
+        
+    }
+    
+    int left=0, right=v.size()-1;
+    
+    while(left<right){
+        
+        
+        v[left++]->next=v[right];
+        
+        if(left==right) break;
+        
+        v[right--]->next=v[left];
+        
+    }
+       v[right]->next=NULL;
+  
+    
+    
+    
+    
+    
+}

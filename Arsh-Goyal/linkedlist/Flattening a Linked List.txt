@@ -1,0 +1,48 @@
+Node *flatten(Node *root)
+{
+   // Your code here
+   
+   
+   Node *temp=root, *b=root , *head=NULL , *p=NULL;
+   
+   vector<int> v;
+   
+   while(temp){
+       
+       while(b){
+           v.emplace_back(b->data);
+           b=b->bottom;
+           
+       }
+       temp=temp->next;
+       b=temp;
+       
+   }
+   
+   sort(v.begin() , v.end() );
+   
+   int i=0, n=v.size();
+   
+   while(i<n){
+      
+      Node * newnode=new Node(v[i]);
+      
+      if(head==NULL){
+          head=newnode;
+          p=head;
+      }else{
+          
+          p->bottom=newnode;
+          p=p->bottom;
+          
+      }
+       
+       i++;
+       
+   }
+   
+   
+   return head;
+   
+   
+}
