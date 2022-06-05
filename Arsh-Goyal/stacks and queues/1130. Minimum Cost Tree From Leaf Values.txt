@@ -1,0 +1,47 @@
+class Solution {
+public:
+    int mctFromLeafValues(vector<int>& arr) {
+        
+        
+        vector<int> stack;
+        
+        stack.push_back(100);
+        int res=0;
+        for(int val:arr){
+            
+            while(stack.back()<=val){
+                
+                int mid_ele=stack.back();
+                
+                 stack.pop_back();
+                
+                res+=mid_ele*min(stack.back() , val );
+                
+               
+                
+                
+                
+            }
+            
+            stack.push_back(val);
+            
+            
+        }
+        
+        int n=stack.size();
+            
+        for(int i=2;i<n;i++){
+            
+            res+=stack[i-1]*stack[i];
+            
+            
+        }
+        
+        return res;
+        
+        
+        
+        
+        
+    }
+};
