@@ -1,0 +1,57 @@
+class Solution {
+public:
+    bool isSubtree(TreeNode* root, TreeNode* subroot) {
+       
+        
+       if(subroot==NULL) return true;
+        
+        if(root==NULL) return false;
+        
+        if(sametree(root,subroot)==true){
+            return true;
+        }
+        
+        
+        
+        
+        
+       return isSubtree(root->left ,subroot) or isSubtree(root->right,subroot); 
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    bool sametree(TreeNode* root , TreeNode* subroot){
+        
+        
+        
+        if(root==NULL and subroot==NULL) return true;
+        
+        if(root==NULL or subroot==NULL) return false; 
+        
+        if(root->val!=subroot->val){
+            return false;
+        }
+        
+        
+        return (sametree(root->left,subroot->left) and sametree(root->right,subroot->right));
+        
+        
+        
+        
+    }
+    
+   
+    
+    
+                
+    
+    
+    
+    
+    
+};

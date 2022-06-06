@@ -1,0 +1,44 @@
+class Solution {
+public:
+    
+    int diam=0;
+    
+    int diameterOfBinaryTree(TreeNode* root) {
+        
+        if(root==NULL) return 0;
+        
+        int left = dfs(root->left);
+        
+        int right = dfs(root->right);
+        
+        return max(left + right, diam);
+        
+    }
+    
+    
+    int dfs(TreeNode* root){
+        
+        
+        if(root==NULL) return 0;
+        
+        
+        int left=dfs(root->left);
+        
+        int right=dfs(root->right);
+        
+        diam=max(diam,left+right);
+        
+        
+        
+        
+        return 1+max( left , right );
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+};
