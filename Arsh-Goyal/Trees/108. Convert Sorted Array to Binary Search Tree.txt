@@ -1,0 +1,29 @@
+class Solution {
+public:
+    
+    
+    TreeNode* dfsmid(vector<int>& nums , int low , int high ){
+        
+        
+        if(low>high) return nullptr;
+        
+        int mid=(low+high)/2;
+        
+        
+        return new TreeNode(nums[mid], dfsmid(nums,low,mid-1) , dfsmid(nums,mid+1,high));
+        
+        
+        
+    }
+    
+    
+    
+    
+    TreeNode* sortedArrayToBST(vector<int>& nums) {
+
+        
+        return dfsmid(nums,0,nums.size()-1);
+        
+        
+    }
+};
