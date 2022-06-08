@@ -1,0 +1,54 @@
+class Solution {
+public:
+    
+      bool flag=true;
+
+  
+    bool isBalanced(TreeNode* root) {
+   
+        
+        
+        
+       travel(root);
+        
+        return flag;
+        
+        
+    
+        
+    }
+    
+
+        
+        
+    
+    
+    int travel(TreeNode *root ){
+        
+                
+
+
+        
+        if(!root) return 0;
+        if(!flag) return 0;
+        int lh=travel(root->left);
+        int rh=travel(root->right);
+            
+        cout<<root->val <<" "<<lh<<" "<<rh <<endl;
+        
+         if(abs(lh-rh)>1   ) flag = false;   
+        
+        
+             return 1+max(lh,rh);
+        
+        
+        
+        
+        
+        
+        
+    }
+    
+    
+    
+};
