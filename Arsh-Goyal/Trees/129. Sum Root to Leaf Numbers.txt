@@ -1,0 +1,50 @@
+class Solution {
+public:
+    
+    
+    vector<int> ans  ;
+    int sum=0;
+    
+    int sumNumbers(TreeNode* root) {   
+        vector<int> v;
+      preorder(root, v);
+        
+      
+        return sum;
+        
+    }
+    
+    
+    
+    void preorder(TreeNode* root , vector<int> v ){
+        
+        
+        
+          if(!root ) return ;
+        
+        v.push_back(root->val);
+        
+         preorder(root->left, v );
+        
+        if( root->left==NULL && root->right==NULL ){
+            
+            int size=v.size();
+            int fin_ans=v[0];
+            for(int i=1;i<size;i++){
+               
+                fin_ans=fin_ans*10;
+                fin_ans=fin_ans+v[i];
+            }
+           sum+=fin_ans;
+            return ;
+        }
+        
+        
+       
+        preorder(root->right , v );
+        
+        
+        
+        
+    }
+};

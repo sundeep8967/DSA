@@ -1,0 +1,27 @@
+    
+    bool vald(TreeNode *root ,long long lmin ,long long rmin   ) {
+        
+        if(!root) return true;
+        
+        if(root->val<=lmin || root->val>=rmin) return false;
+        
+        
+        
+        return ( vald(root->left,lmin , root->val ) && vald( root->right , root->val ,rmin));
+        
+        
+    }
+    
+    
+    
+    
+    bool isValidBST(TreeNode* root) {
+        
+        if(!root->left  && !root->right) return true;
+        
+        
+        return vald(root,LLONG_MIN , LLONG_MAX);
+        
+        
+    }
+};

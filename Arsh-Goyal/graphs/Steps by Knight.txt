@@ -1,0 +1,54 @@
+    public:
+    //Function to find out minimum steps Knight needs to reach target position.
+	int minStepToReachTarget(vector<int>&KnightPos,vector<int>&TargetPos,int N)
+	{
+	    // Code here
+	    
+	    
+	    
+	    pair<int,int> arr[8]={{2,1} , {1,2} , {-1,-2 }, {-2 , -1} , { -1 ,2, } , { 1, -2} , {-2 , 1 } , {2 , -1} };
+	    
+	    
+	    
+	   int  vis[N+1][N+1]={0};
+	   queue<pair<int,int>> q;
+	   q.push({KnightPos[0] , KnightPos[1]});
+	   vis[KnightPos[0]][KnightPos[1]]=1;
+	   int count=0;
+	   while(!q.empty()){
+	       
+	      int size=q.size();
+	      
+	      while(size--){
+	          
+	           pair<int,int> p = q.front();
+	       q.pop();
+	       
+	       int a=p.first;
+	       int b=p.second;
+	       
+	       if(a==TargetPos[0] and b==TargetPos[1]) return count;
+	       
+	       for(int i=0;i<8 ; i++){
+	           int j=a+arr[i].first;
+	           int k=b+arr[i].second;
+	           
+	           if(j>0 and k>0  and j<=N and k<=N and !vis[j][k] ){
+	               q.push({j,k});
+	               vis[j][k]=1;
+	           }
+	           
+	           
+	       }//for
+	          
+	          
+	      }//while
+	       count++;
+	       
+	   }
+	    
+	    return count;
+	    
+	    
+	}
+};

@@ -1,0 +1,49 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    //0 --> Node has a camera
+    // -1-->need camera
+    // 1--> covered
+  static  int camers = 0;
+    
+    static int Rec(TreeNode root){
+        if(root == null)
+            return 1;
+            
+        int left = Rec(root.left);
+        int right = Rec(root.right);
+        
+    //any one of left /right needs camera i should buy taat
+        if(left == -1 || right == -1){
+            camers++;//1
+            return 0;
+        }
+        // left and right childs are coveres but i need camera from parent
+        if(left == 0 || right == 0) {
+            return 1;   
+        }
+        // if any left / right node has camer then i dont need any camers
+        // if(left == 0 || right == 0 )
+            return -1;
+    }
+    
+    public int minCameraCover(TreeNode root) {
+        camers =0;
+        int data =  Rec(root);
+        return data == - 1 ?++camers : camers;
+        
+    }
+}
