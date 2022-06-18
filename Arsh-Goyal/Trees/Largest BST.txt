@@ -1,0 +1,40 @@
+lass Solution{
+    public:
+    /*You are required to complete this method */
+    // Return the size of the largest sub-tree which is also a BST
+    
+    int sizze(Node* root){
+        
+        if(!root) return 0;
+        
+        return sizze(root->left)+1+sizze(root->right);
+        
+    }
+    
+    bool validate(Node* root , int mx , int mi){
+        
+        
+        if(!root) return true;
+        
+        if(root->data >=mx || root->data<=mi) return false;
+        
+        return validate(root->left , root->data , mi) && validate(root->right , mx , root->data);
+        
+        
+    }
+    
+    
+    int largestBst(Node *root)
+    {
+    	//Your code here
+    	
+    	
+    	if(!root) return 0;
+    	if(validate(root , INT_MAX , INT_MIN)) return sizze(root);
+    	
+    	return max( largestBst(root->left) , largestBst(root->right)  );
+    	
+    	
+    	
+    }
+};

@@ -1,0 +1,32 @@
+Node* solve(int pre[] , int min ,int max , int &index , int n){
+    
+    if(index>=n) return NULL;
+    
+    if(pre[index]<min || pre[index]>max){
+        return NULL ;
+    }
+    
+    Node* root=newNode(pre[index++]);
+    
+    root->left =solve(pre,min,root->data , index , n );
+    root->right =solve(pre,root->data , max , index , n);
+    
+    return root;
+    
+    
+    
+}
+
+
+
+Node* post_order(int pre[], int size)
+{
+    //code here
+    
+    int index=0;
+    
+    Node* root=solve(pre, INT_MIN , INT_MAX , index , size);
+    
+    return root;
+    
+}
