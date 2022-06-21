@@ -1,0 +1,34 @@
+class Solution {
+public:
+    
+    void solve(int open , int close ,  vector<string>& v , string s  ) {
+        
+        if( !open && !close ){
+         
+            v.push_back(s);
+            return ;
+            
+        }
+        
+        if(open>0) solve(open-1, close ,v ,  s+"(" );
+        
+        if( close>open ) solve(open , close-1 , v ,  s+")");
+        
+        return ;
+        
+        
+        
+        
+    }
+    
+    
+    
+    vector<string> generateParenthesis(int n) {
+        
+    vector<string> v ;
+        string s="" ;
+        solve(n , n ,  v  , s );
+        return v;
+        
+    }
+};

@@ -1,0 +1,33 @@
+class Solution {
+public:
+    string reverseWords(string s) {
+        
+        
+        
+        stringstream ss(s);
+        string sub;
+        vector<string> ans;
+        
+        while(ss>> sub ){
+            
+            ans.push_back(sub);
+        
+        }
+        
+   
+        int n=ans.size();
+        string finans="";
+     
+        for(int i=n-1 ; i>=0 ; i--){
+        
+            finans+=ans[i];
+            if(i!=0)finans+=" ";
+            
+            
+            
+        }
+    
+        return finans;
+        
+    }
+};

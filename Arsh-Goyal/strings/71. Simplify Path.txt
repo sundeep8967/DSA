@@ -1,0 +1,48 @@
+class Solution {
+public:
+    string simplifyPath(string path) {
+        
+       stringstream ss(path);
+        
+        string subs;
+        
+        vector<string> st;
+        
+        string fin_ans="";
+        
+        while(getline(ss , subs  , '/')){
+            
+            
+            if(subs=="." || subs.empty()) continue;
+            
+            if(subs==".."){
+                
+                if(st.empty()==false) st.pop_back();
+                
+            }
+            else{
+                st.push_back( subs );
+            }
+            
+            
+            
+        }
+        
+        cout<<st.size()<<endl;
+        
+        for(string x : st){
+            
+            
+            fin_ans+="/";
+            fin_ans+=x;
+            
+        }
+        
+        
+        return fin_ans.empty()==true?"/":fin_ans;
+        
+        
+        
+        
+    }
+};
