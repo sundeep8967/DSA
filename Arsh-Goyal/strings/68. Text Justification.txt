@@ -1,0 +1,124 @@
+class Solution {
+public:
+    
+    
+    void packwords(vector<string>&words , int maxwidth , int &index , vector<string>&linewords)
+    {
+        
+        
+        while(index<words.size()){
+            
+          int wordsize=words[index].size();
+            
+            if(wordsize>maxwidth) return ;
+            
+            maxwidth-=wordsize;
+            maxwidth--;//for space
+            
+            linewords.push_back(words[index]);
+            index++;
+            
+        }
+        
+        
+        
+    }
+    
+    
+    void leftjustified(vector<string>linewords , int maxWidth , string &line ){
+     
+        
+        for(int i=0;i<linewords.size();i++){
+            
+            line+=linewords[i];
+            
+            if(i!=linewords.size()-1){
+                line+=" ";
+            }
+            
+            
+        }
+        
+        int extraspace=maxWidth-line.size();
+        
+        line.append(extraspace , ' ');
+        
+        
+    }
+    
+    
+    void fulljustified(vector<string>linewords , int maxwidth , string &line){
+        
+        
+        if(linewords.size()==1){
+            
+            leftjustified(linewords , maxwidth , line);
+                return ;
+        }
+        
+        int totalcharlen=0;
+        for( auto word : linewords){
+            totalcharlen+=word.size();
+        }
+        
+        
+        int tspace=(maxwidth-totalcharlen)/(linewords.size()-1);
+        int Espace=(maxwidth-totalcharlen)%(linewords.size()-1);
+        
+        for(int i=0;i<linewords.size() ;i++){
+            
+            line+=linewords[i];
+            
+            if(i!=linewords.size()-1){
+                
+               line.append(tspace,' ');
+                if(Espace>0){
+                    line+=" ";
+                    Espace--;
+                }
+                
+                
+            }
+        }
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    vector<string> fullJustify(vector<string>& words, int maxWidth) {
+     
+        
+        
+        
+        
+        int index=0;
+        vector<string> linewords, output;
+        string line;
+        
+        while(index<words.size()){
+            
+            packwords(words , maxWidth , index , linewords );
+            
+            
+            if(index<words.size()){
+                fulljustified(linewords , maxWidth ,line);
+            }else{
+                leftjustified(linewords , maxWidth , line);
+            }
+            
+            
+            output.push_back(line);
+            line.clear();
+            linewords.clear();
+        }
+        
+        return output;
+        
+        
+        
+    }
+};
