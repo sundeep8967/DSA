@@ -1,0 +1,44 @@
+class Solution {
+public:
+    vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
+        
+        
+        int n= graph.size();
+        vector<int> vis(n,0), v;
+        vector<int> dfsvisit(n,0);
+        
+        
+        
+        for(int i=0;i<n;i++){
+            
+            
+                if(dfscycle(i , graph , vis , dfsvisit ) ==0){
+                    v.push_back(i);
+                }//if
+                        
+        }//for
+        return v;
+        
+    }
+    
+    
+    
+    bool dfscycle(int i , vector<vector<int>> &graph , vector<int> &vis ,vector<int> &dfsvisit ){
+        
+                 
+        vis[i]=1;
+        dfsvisit[i]=1;
+        
+        for(int x : graph[i]){
+            
+            if(dfsvisit[x]) return true; 
+            
+            else if(vis[x]==0 && dfscycle(x ,graph , vis , dfsvisit)) return true;
+            
+        }
+        
+        return dfsvisit[i]=0;
+        
+    }
+    
+};

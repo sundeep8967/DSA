@@ -1,0 +1,97 @@
+// { Driver Code Starts
+#include<bits/stdc++.h>
+using namespace std;
+
+ // } Driver Code Ends
+
+
+class Solution
+{
+	public:
+	//Function to find number of strongly connected components in the graph.
+	
+	
+	void topo(vector<int>& vis , vector<int>adj[] , int node , stack<int>&st){
+	    vis[node]=1;
+	    for(auto p :adj[node]){
+	        if(!vis[p]){
+	            topo(vis,adj,p,st);
+	        }
+	    }
+	    st.push(node);
+	}
+	
+	void revdfs(int node , vector<int> &vis , vector<int>trans[]){
+	    vis[node]=1;
+	    for(auto p:trans[node]){
+	        if(!vis[p])revdfs(p,vis,trans);
+	    }
+	}
+	
+	
+	
+    int kosaraju(int V, vector<int> adj[])
+    {
+        //code here
+        stack<int> st;
+        vector<int>vis(V,0);
+        for(int i=0;i<V;i++){
+            if(!vis[i]){
+                topo(vis , adj , i , st);
+            }
+        }
+   
+        vector<int> trans[V];
+        for(int i=0;i<V;i++){
+            vis[i]=0;
+            for(auto p: adj[i])trans[p].push_back(i);
+        }
+        int ans=0;
+        
+        while(!st.empty()){
+            int top=st.top();
+            st.pop();
+            
+            if(!vis[top]){
+                ans++;
+                revdfs(top,vis,trans);
+            }
+            
+            
+            
+        }
+        return ans;
+        
+    }
+};
+
+// { Driver Code Starts.
+
+
+int main()
+{
+    
+    int t;
+    cin >> t;
+    while(t--)
+    {
+    	int V, E;
+    	cin >> V >> E;
+
+    	vector<int> adj[V];
+
+    	for(int i = 0; i < E; i++)
+    	{
+    		int u, v;
+    		cin >> u >> v;
+    		adj[u].push_back(v);
+    	}
+
+    	Solution obj;
+    	cout << obj.kosaraju(V, adj) << "\n";
+    }
+
+    return 0;
+}
+
+  // } Driver Code Ends

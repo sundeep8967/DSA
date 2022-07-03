@@ -1,0 +1,99 @@
+///dsu method
+
+
+class Solution {
+public:
+    int makeConnected(int n, vector<vector<int>>& connections) {
+        
+        if(connections.size()<n-1) return -1;
+        
+        
+        vector<int> parent(n,-1);
+        
+        for(vector<int> con : connections){
+            
+            
+            int a =find(parent,con[0] ); 
+            int b =find(parent,con[1] );
+            
+            if(a!=b){
+                parent[a]=b;
+            }
+            
+        }
+        
+        int res=-1;
+        
+        for(int i=0;i<n;i++){
+            if(parent[i]==-1)res++;
+        }
+        
+        
+        return res;
+        
+    }
+    
+    
+    int find(vector<int>&parent , int i ){
+        
+        if(parent[i]==-1){
+            return i;
+        }
+        
+        return parent[i]=find(parent , parent[i]);
+        
+        
+    }
+    
+    
+    
+};
+////
+
+dfs method ;
+class Solution {
+public:
+    
+    
+    void dfs(vector<vector<int>> &adj , int i , vector<int> &vis){
+        
+        vis[i]=1;
+       for(int x : adj[i]){
+           if(!vis[x]){
+           dfs(adj, x , vis);
+           }
+       } 
+        
+    }
+    
+    
+    int makeConnected(int n, vector<vector<int>>& connections) {
+    
+        
+        if(n>connections.size()+1)return -1;
+        
+        
+        vector<int> vis(n,0);
+        vector<vector<int>> adj(n);
+        
+            for(vector<int> con : connections ){
+                adj[con[0]].push_back(con[1]);
+                adj[con[1]].push_back(con[0]);
+            }
+        
+        
+        int comp=0;
+        for(int i=0;i<n;i++){
+            
+            if(!vis[i]){
+                comp++;
+                dfs(adj , i , vis);
+            }
+            
+        }
+        
+        return comp-1;
+        
+        
+    }
+};
