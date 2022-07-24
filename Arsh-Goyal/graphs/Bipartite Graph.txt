@@ -1,0 +1,43 @@
+class Solution {
+public:
+	bool isBipartite(int V, vector<int>adj[]){
+	    // Code here
+	    
+	    vector<int> vis(V,0) , col(V,0);
+	    
+	    queue<int> q;
+	    
+	    for(int i=0;i<V;i++){ //handling the disconnected components ;
+	        
+	        
+	        q.push(i);
+	        col[i]=1;
+	        
+	        while(!q.empty()){
+	            
+	            int size=q.empty();
+	            
+	            int temp=q.front();q.pop();
+	            
+	            if(vis[temp]==1) continue;
+	            
+	            vis[temp]=1;
+	            
+	            for(int node: adj[temp]){
+	                
+	                if(col[node]==col[temp]){
+	                    return false;
+	                }
+	                col[node]=-col[temp];
+	                q.push(node);
+	                
+	            }
+	        }
+	    }
+	    
+	    return true;
+	    
+	    
+	}
+
+};

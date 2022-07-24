@@ -1,0 +1,91 @@
+class Solution {
+public:
+    
+    int size=0;
+    
+    
+    
+    int pnp(int ind , vector<vector<int>> &ds, vector<vector<vector<int>>> &dp,int m ,int n){
+        
+        if(ind==size-1){
+            
+            if(ds[ind][0] <= m && ds[ind][1] <= n) return 1;
+            
+            return 0;
+        }
+        
+        if(m==0 && n==0) return 0;
+        
+        if(dp[ind][m][n]!=0) return dp[ind][m][n];
+        
+        
+        
+        
+        
+        
+        int pick=0;
+        //pick
+        if(ds[ind][0]<=m &&ds[ind][1]<=n)
+          pick=1+pnp(ind+1,ds,dp,m-ds[ind][0],n-ds[ind][1]);
+        //not pick
+        int npick=pnp(ind+1,ds,dp,m,n);
+        
+        return dp[ind][m][n]=max(pick,npick);
+        
+        
+    }
+    
+    int pnp2(int size, int m ,int n ,vector<vector<int>>ds,vector<vector<vector<int>>>dp ){
+        
+        for(int i=ds[size-1][0];i<=m;i++){
+            for(int j=ds[size-1][1];j<=n;j++){
+                dp[size-1][i][j]=1;
+            }
+        }
+        
+        for(int i=size-2;i>=0;i--){
+            for(int j=m ; j>=0;j--){
+                for(int k=n;k>=0;k--){
+                    
+                    int npick=dp[i+1][j][k];
+                    
+                    int pick=0;
+                    
+                    if(ds[i][0]<=j && ds[i][1]<=k) pick=dp[i+1][j-ds[i][0]][k-ds[i][1]]+1;
+                    
+                    dp[i][j][k]=max(pick,npick);
+                    
+                }
+            }
+        }
+        
+        return dp[0][m][n];
+    }
+    
+    
+    int findMaxForm(vector<string>& strs, int m, int n) {
+        
+         size=strs.size();
+        
+        vector<vector<vector<int>>> dp(size, vector<vector<int>>(m+1,vector<int>(n+1,0)) );
+        
+        vector<vector<int>>ds(size,vector<int>(2,0));
+        int ii=0;
+        for(string str : strs ){
+            int cz=0,co=0;
+            int slen=str.size();
+            for(int i=0;i<slen;i++){
+                if(str[i]=='0')cz++;
+                else co++;
+            }
+            ds[ii][0]=cz;
+            ds[ii][1]=co;
+            ii++;
+        }
+        
+        return pnp2(size,m,n,ds,dp);
+        return pnp(0,ds,dp,m,n);
+        
+        
+    }
+};

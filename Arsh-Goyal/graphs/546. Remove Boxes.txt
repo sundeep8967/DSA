@@ -1,0 +1,61 @@
+class Solution {
+public:
+    
+    vector<vector<vector<int>>> dp;
+    
+    int dfs(vector<int>&boxes ,int left ,int r ,int count ){
+        
+         int l=left;
+        
+         if(l>r) return 0;
+                   
+         if(dp[l][r][count]!=-1){
+            return dp[l][r][count];
+        }
+        
+        
+        
+        int cnt=count;
+           
+        while( l<r && boxes[l+1]==boxes[l] ){
+            cnt++;
+            l++;
+        }
+        
+        //combine
+        int ans = dfs(boxes , l+1 , r , 0 ) + (cnt+1)*(cnt+1);
+        
+        for(int i=l+1 ; i <=r ; i++){
+            
+            if(boxes[i]==boxes[l] ){
+            int temp=dfs( boxes , l+1 , i-1 , 0) + dfs(boxes,i,r,cnt+1);
+            
+            ans=max(ans ,temp );
+            }
+        }
+        
+        
+        return dp[left][r][count]=ans;
+        
+        
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    int removeBoxes(vector<int>& boxes) {
+        
+        dp.resize(101 , vector<vector<int>>(101 , vector<int>(101,-1)) );
+        
+        int right=boxes.size();
+        
+        return dfs( boxes, 0 , right-1 , 0 );
+        
+        
+        
+    }
+};

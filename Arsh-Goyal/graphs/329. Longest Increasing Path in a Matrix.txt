@@ -1,0 +1,56 @@
+class Solution {
+public:
+    
+    pair<int,int> dir[4]={ {1,0 },{-1,0}, {0,1}, {0,-1}};
+        
+        
+        
+        
+    int dfs(int i , int j , int n , int m , vector<vector<int>> &matrix , vector<vector<int>> &dp){
+        
+        int maxx=0;
+        
+       if(dp[i][j]>0) return dp[i][j];
+        
+        for(int k=0;k<4 ;k++ ){
+            
+            int newx=i+dir[k].first;
+            int newy=j+dir[k].second;
+            
+            if(newx>=0 && newy>=0 && newx<n && newy<m && matrix[i][j]<matrix[newx][newy]){
+                
+                   maxx=max( dfs(newx , newy , n , m , matrix , dp) , maxx );
+                  
+            }
+            
+        }
+        
+        dp[i][j]=maxx+1;
+        
+        return maxx+1;
+  
+        
+    }
+    
+    
+    int longestIncreasingPath(vector<vector<int>>& matrix) {
+        
+        
+        int n=matrix.size();
+        int m=matrix[0].size();
+        vector<vector<int>> dp(n,vector<int>(m,0));
+
+        
+        int realmax=INT_MIN;
+        for(int i=0;i<n;i++){
+            
+            for(int j=0;j<m;j++){
+                
+              realmax=max( dfs(i , j , n , m , matrix , dp ), realmax)   ;  
+            
+            }
+        }
+        
+        return realmax;
+    }
+};

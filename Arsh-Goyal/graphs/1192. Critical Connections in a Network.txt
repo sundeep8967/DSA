@@ -1,0 +1,73 @@
+class Solution {
+public:
+    
+    vector<int> on,in,vis;
+    
+    int timer=1;
+    void dfstarjans( vector<int>adj[] , vector<vector<int>> &ans, int node , int par){
+        
+        timer++;
+        in[node]=timer;
+        on[node]=timer;
+        
+        vis[node]=1;
+        
+        for(int child :adj[node] ){
+            
+            if(child==par)continue;
+            
+            if(!vis[child]){//not visited
+              dfstarjans(adj,ans,child,node);
+           
+                on[node]=min(on[node],on[child]);
+                
+                if(on[child]>in[node]){
+                
+                  vector<int>temp;
+                    temp.push_back(node);
+                    temp.push_back(child);
+                    ans.push_back(temp);
+                }
+            }
+            
+            else{// visited
+                
+                on[node]=min(on[node],in[child]);
+            }
+            
+        }
+        
+        
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    vector<vector<int>> criticalConnections(int n, vector<vector<int>>& connections) {
+        
+        vector<int>adj[n];
+        
+        int consize=connections.size();
+        
+        on.resize(n);
+        in.resize(n);
+        vis.resize(n,0);
+        
+        
+        for(auto con:connections){
+            adj[con[0]].push_back(con[1]);
+            adj[con[1]].push_back(con[0]);
+        }
+        vector<vector<int>> ans;
+        
+        dfstarjans(adj,ans,0 , -1);
+        
+        return ans;
+        
+    }
+};

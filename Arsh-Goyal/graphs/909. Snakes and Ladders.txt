@@ -1,0 +1,90 @@
+class Solution {
+public:
+    
+    pair<int,int> indextofind(int pos , int n ){
+        
+        int i,j;
+        
+      i=(pos-1)/n;
+        
+        if(i%2==0){
+            j=(pos-1)%n;
+        }
+        else {
+            j=(n-1)-(pos-1)%n;
+        }
+        
+        i=(n-1)-i;
+        
+        return {i,j};
+        
+        
+        
+        
+        
+    }
+    
+    
+    
+    int snakesAndLadders(vector<vector<int>>& board) {
+        
+        
+        queue<int> q;
+        
+        unordered_set<int>v ;
+        int n=board.size();
+        int overall=n*n;
+        q.push(1);
+        v.insert(1);
+       unsigned int moves=-1;
+        
+        while(!q.empty()){
+            moves++;
+            
+         int size=q.size();
+         
+            for(int i=0;i<size;i++){
+                
+               int curr=q.front();
+               q.pop();
+                if(curr==n*n){
+                    return moves;
+                }
+            
+               
+                for(int i=curr+1 ; i<=min(curr+6 , overall);i++){
+                    if(!v.count(i)){
+                    pair<int,int> pos=indextofind(i,n);
+                    
+                    int x=pos.first;
+                    int y=pos.second;
+                 
+                    if(board[x][y]==-1){
+                        q.push(i);
+                    }
+                    else{
+                        q.push(board[x][y]);
+                    }
+                      v.insert(i);
+                    }
+                  
+                }
+                
+                
+                
+                
+                
+            }
+            
+            
+            
+            
+            
+        }
+        
+        return -1;
+        
+        
+        
+    }
+};

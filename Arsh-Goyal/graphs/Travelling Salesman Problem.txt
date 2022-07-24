@@ -1,0 +1,78 @@
+//{ Driver Code Starts
+
+#include<bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+
+class Solution {
+public:
+int total_cost(vector<vector<int>>cost){
+    // Code here
+    
+    
+    int s=0;
+    int n=cost.size();
+    
+    vector<int> graph[n],v ;
+    
+    // int size=cost.size();
+    
+    for(int i=0;i<n;i++){
+        if(i!=s) v.push_back(i);
+    }
+    
+    
+    for(int i=0;i<n;i++){
+        
+        for(int co : cost[i]){
+        
+            graph[i].push_back(co);
+        }
+        
+    }
+    int minpathcost=INT_MAX;
+    do{
+        
+        int k=s,tempcost=0;
+        
+        for(int i=0;i<n-1;i++){
+             tempcost+=graph[k][v[i]];
+            //  cout<<tempcost<<endl;
+             k=v[i];
+        }
+        tempcost+=graph[k][s];
+        // cout<<tempcost<<endl;
+        minpathcost=min(minpathcost,tempcost);
+        
+        
+        
+    }while(next_permutation(v.begin(),v.end()));
+    
+    return minpathcost;
+    
+    
+    
+    
+    
+    
+}
+};
+
+//{ Driver Code Starts.
+int main(){
+	int tc;
+	cin >> tc;
+	while(tc--){
+		int n;
+		cin >> n;
+		vector<vector<int>>cost(n, vector<int>(n, 0));
+		for(int i = 0; i < n; i++)
+			for(int j = 0; j < n; j++)cin >> cost[i][j];
+		Solution obj;
+		int ans = obj.total_cost(cost);
+		cout << ans <<"\n";
+	}
+	return 0;
+}
+// } Driver Code Ends

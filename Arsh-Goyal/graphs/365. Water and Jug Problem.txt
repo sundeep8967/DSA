@@ -1,0 +1,41 @@
+class Solution {
+public:
+    bool canMeasureWater(int x, int y, int target) {
+        
+        
+        
+        
+        queue<int> q;
+        int sum=x+y;
+        q.push(sum);
+        
+        vector<int> vis(sum+1,0);
+        
+        while(!q.empty()){
+            
+            
+            int curr=q.front();q.pop();
+            
+            if(curr==target)return true;
+            
+            if(vis[curr]==1) continue;
+            
+            vis[curr]=1;
+            
+            
+            
+            if(curr+x<=sum) q.push(curr+x); 
+             if(curr+y<=sum) q.push(curr+y);
+             if(curr-x>=0) q.push(curr-x);
+             if(curr-y>=0) q.push(curr-y); 
+ 
+        
+        }
+        
+        return false;
+        
+        
+        
+        
+    }
+};

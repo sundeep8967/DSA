@@ -1,0 +1,118 @@
+class Solution {
+public:
+    
+    pair<int,int> dir[4]={{1,0},{-1,0},{0,1},{0,-1}};
+    
+    
+    int dfs(int i , int j , int n , int m , vector<vector<int>>& grid , int color , int &count){
+        
+        if(i<0 || j<0 || i>=n || j>=m ){
+            return count;
+        }
+        
+        
+        
+        if(grid[i][j]!=1){
+            return count;
+        }
+        
+      
+        grid[i][j]=color;
+        
+        count++;
+      
+        
+        for(int k=0;k<4;k++){        
+            
+            dfs(i+dir[k].first , j+dir[k].second , n , m , grid , color , count );
+        }
+        
+        return count;
+        
+        
+    }
+    
+    
+    
+    int largestIsland(vector<vector<int>>& grid) {
+        
+        
+        int n=grid.size();
+        int m=grid[0].size();
+        unordered_map<int,int> mp;
+        int color=2;
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                
+                if(grid[i][j]==1){
+                    
+                    int x=0;
+                    dfs(i,j,n,m,grid,color, x );
+                    mp[color]=x;
+                    
+                    color++;
+                    
+                
+                    }
+
+            }
+    
+            
+        }
+        
+        
+        int subarea=INT_MIN; 
+        for(auto cham : mp){
+            subarea=max(subarea,cham.second);
+        }
+       
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                
+                if(grid[i][j]==0){
+                    
+                      int temp = 1;
+                     unordered_set<int> vis;
+                    for(auto x:dir){
+                        
+                           if(i+x.first<0 ||j+x.second<0 || i+x.first>=n ||j+x.second>=m )continue;
+   
+                        else if( !vis.count(grid[i+x.first][j+x.second]) ){
+              
+                            vis.insert(grid[i+x.first][j+x.second]);
+                            
+                            temp+=mp[ grid[i+x.first][j+x.second] ];
+                    
+                        
+                        }
+                        
+                        
+                    }
+                    
+                    subarea=max(subarea,temp);
+                    
+                    
+                    
+                }
+                
+                
+                
+            }
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        return subarea;
+        
+        
+    }
+};
