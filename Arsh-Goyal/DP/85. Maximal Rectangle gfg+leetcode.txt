@@ -1,0 +1,93 @@
+https://leetcode.com/problems/maximal-rectangle/
+
+class Solution {
+public:
+     int largestRectangleArea(vector<int>& height) {
+        
+        
+        
+        stack<int> st;
+        int n=height.size();
+        vector<int> prev(n),next(n);
+        
+        
+        
+        for(int i=0;i<n;i++){
+            
+                while(!st.empty() && height[st.top()]>=height[i]){
+                    st.pop();
+                }
+                
+                    if(st.empty()){
+                       prev[i]=-1;
+                       st.push(i);
+                    }else{
+                        prev[i]=st.top();
+                        st.push(i);
+                        
+                    }   
+             
+        }
+
+        stack<int> st1;
+        
+       for(int i=n-1;i>=0;i--){
+       
+                while(!st1.empty() && height[st1.top()]>=height[i]){
+                    st1.pop();
+                }
+                
+                    if(st1.empty()){
+                       next[i]=n;
+                       st1.push(i);
+                    }else{
+                        next[i]=st1.top();
+                        st1.push(i);
+                        
+                    }   
+             
+        }
+        
+        int maxarea=INT_MIN;
+        
+        for(int i=0;i<n;i++){
+            
+            maxarea=max(maxarea,(next[i]-prev[i]-1)*height[i]);
+            
+        }
+        
+        
+        return maxarea;
+    }
+    int maximalRectangle(vector<vector<char>>& matrix) {
+        
+        int n=matrix.size();
+        
+        int m=matrix[0].size();
+        
+        vector<int> v(m,0);
+        
+        int ans=INT_MIN;
+        for(int i=0;i<n;i++){
+         
+            for(int j=0;j<m;j++){
+                if(matrix[i][j]=='1'){
+                v[j]++;
+                }
+                else{
+                    v[j]=0;
+                }
+         }  
+
+            int area=largestRectangleArea(v);
+       
+            
+            ans=max(ans,area);
+            
+        }
+        
+        return ans;
+        
+        
+    }
+};

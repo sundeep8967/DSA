@@ -1,0 +1,54 @@
+class Solution {
+public
+    
+ unordered_mapint,intmp;
+    
+    bool solve(vectorint &stones ,int ind, int k , int &n,  vectorvectorint &dp){
+        
+         if(  ind==n-1  ){
+            return true;
+        }
+        
+       if(dp[ind][k]!=-1) return dp[ind][k];
+        
+        int loc1=stones[ind]+k-1;
+        int loc2=stones[ind]+k;
+        int loc3=stones[ind]+k+1;
+    
+        bool a=false , b=false , c=false ;
+           
+        if(mp[loc1]!=0 && mp[loc1]!=ind){
+         a=solve(stones, mp[loc1] ,k-1,n,dp);    
+        }
+        
+        if(mp[loc2]!=0 && mp[loc2]!=ind){
+         b=solve(stones, mp[loc2] ,k,n,dp);    
+        }
+        
+        if(mp[loc3]!=0 && mp[loc3]!=ind){
+         c=solve(stones, mp[loc3] ,k+1,n,dp);    
+        }
+        
+        
+        return dp[ind][k]=( a  b  c );
+        
+        
+        
+        
+    }
+    
+    bool canCross(vectorint& stones) {
+        
+        int n=stones.size();
+        
+        for(int i=0;in;i++){
+            mp[stones[i]]=i;
+        }
+        if(stones[1]-stones[0]1) return false;
+        
+        vectorvectorint dp(n+1,vectorint(n+1,-1) );
+        
+        return solve(stones,1,1,n,dp);
+        
+    }
+};
